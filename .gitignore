@@ -37,7 +37,7 @@ yarn-error.log
 testem.log
 /typings
 /ssl
-/src/app/environments/*
+/src/app/environments/
 
 # System files
 .DS_Store
