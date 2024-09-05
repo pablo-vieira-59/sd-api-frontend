@@ -37,8 +37,8 @@ yarn-error.log
 testem.log
 /typings
 /ssl
-/src/app/environments/
 
 # System files
 .DS_Store
 Thumbs.db
+src/app/environments/environment.ts
