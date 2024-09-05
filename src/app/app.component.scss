@@ -1,0 +1,26 @@
+@import '../styles.scss';
+
+.header{
+    height: 64px;
+    background-color: $--primary;
+    width: 100svw;
+    position: fixed;
+
+    img{
+        height: 40px;
+    }
+
+    border-style: solid;
+    border-color: #000000;
+    border-width: 0px;
+    border-bottom-width: 8px;
+    z-index: 98;
+}
+
+.loader{
+    position: fixed;
+    background-color: #000000a6;
+    height: 100%;
+    width: 100%;
+    z-index: 99;
+}

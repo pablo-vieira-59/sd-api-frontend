@@ -1,0 +1,181 @@
+$--primary : #1b498a;
+$--secondary : #eeede8;
+$--light:#FFFFFF;
+$--gray:#cacaca;
+$--background:#dddbd1;
+
+$--test:#0000003f;
+
+$--fs-1: 8px;
+$--fs-2: 12px;
+$--fs-3: 16px;
+$--fs-4: 20px;
+$--fs-5: 24px;
+$--fs-6: 28px;
+$--fs-7: 32px;
+
+$--fw-1: 100;
+$--fw-2: 200;
+$--fw-3: 300;
+$--fw-4: 400;
+$--fw-5: 500;
+$--fw-6: 600;
+$--fw-7: 700;
+$--fw-b: bold;
+
+.lfs-2{
+    font-size: $--fs-2;
+}
+
+.lfs-3{
+    font-size: $--fs-3;
+}
+
+.lfs-5{
+    font-size: $--fs-5;
+}
+
+.lfs-7{
+    font-size: $--fs-7;
+}
+
+.lfw-2{
+    font-weight: $--fw-2;
+}
+
+.lfw-3{
+    font-weight: $--fw-3;
+}
+
+/* You can add global styles to this file, and also import other style files */
+body{
+    background-color: $--background;
+}
+
+*{
+    font-family: "SUSE", sans-serif;
+    font-size: $--fs-4;
+    font-weight: $--fw-b;
+}
+
+.fc-custom{
+    border-style: solid !important;
+    border-radius: 12px;
+    border-color: black !important;
+    border-bottom: 2px;
+    border-right: 2px;
+    border-top: 2px;
+    border-left: 2px;
+    margin-bottom: 14px;
+
+    box-shadow: 6px 6px 0px 0px rgba(0,0,0,0.75);
+}
+
+.tab-page{
+    border-style: solid !important;
+    border-radius: 12px;
+    border-color: black !important;
+    border-bottom: 2px;
+    border-right: 2px;
+    border-top: 2px;
+    border-left: 2px;
+    margin-bottom: 14px;
+    background-color: $--secondary;
+
+    box-shadow: 6px 6px 0px 0px rgba(0,0,0,0.75);
+}
+
+.form-control{
+    background-color: #ffffff;
+}
+
+.form-select{
+    line-height: 36px;
+    font-weight: 500;
+}
+
+.form-check{
+    height: 52px;
+}
+
+.form-radio{
+    width: 28px !important;
+    height: 28px !important;
+}
+
+.form-check-input{
+    margin-top: 8px;
+    height: 36px;
+    width: 72px;
+    border-radius: 52px;
+}
+
+.btn-primary{
+    background-color: $--primary;
+}
+
+.btn{
+    height: 64px;
+    vertical-align: middle;
+    line-height: 48px;
+    font-size: $--fs-5;
+    font-weight: $--fw-5;
+
+    border-style: solid !important;
+    border-radius: 12px;
+    border-color: black !important;
+    border-bottom: 2px;
+    border-right: 2px;
+    border-top: 2px;
+    border-left: 2px;
+    margin-bottom: 14px;
+
+    box-shadow: 6px 6px 0px 0px rgba(0,0,0,0.75);
+}
+
+.ocorp-icon{
+    border-radius: 8px;
+    height: 48px;
+    width: 48px; 
+    color: white;
+    font-size: 24px;
+    line-height: 48px;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+
+    border-style: solid !important;
+    border-color: black !important;
+    border-bottom: 2px;
+    border-right: 2px;
+    border-top: 2px;
+    border-left: 2px;
+    margin-bottom: 14px;
+
+    box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.75);
+}
+
+.tab-btn{
+    height: 64px;
+    font-size: $--fs-3;
+    font-weight: $--fw-b;
+    background-color: $--gray;
+    padding: 4px;
+    text-align: center;
+    margin-right: -2px;
+    align-content: center;
+
+    border-style: solid !important;
+    border-radius: 12px 12px 0px 0px;
+    border-color: black !important;
+    border-bottom: 0px;
+    border-right: 2px;
+    border-top: 2px;
+    border-left: 2px;
+    //box-shadow: 6px -2px 0px 0px rgba(0,0,0,0.75);
+    z-index: 1;
+}
+
+.tab-btn.active{
+    background-color: $--secondary;
+}

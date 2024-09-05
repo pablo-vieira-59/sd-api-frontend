@@ -1,0 +1,225 @@
+<div class="header p-2 shadow d-flex">
+  <img src="assets/Ocorp.svg" class="m-auto">
+</div>
+
+
+<div class="loader d-flex" *ngIf="isLoading">
+  <div class="bg-white fc-custom m-auto p-3" style="max-width: 320px;">
+    <div class="row">
+      <img src="assets/loader.svg" class="m-auto" style="width: 128px;">
+    </div>
+
+    <div class="col-12 text-center">
+      <label class="">Aguarde ...</label>
+      <div class="lfw-3 lfs-3">
+        Sua imagem está sendo gerada , pode demorar um tempo ...
+      </div>
+    </div>
+
+    <div class="progress mt-2">
+      <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style]="progressStyle"></div>
+    </div>
+
+    <div class="col-12 mt-2 text-center">
+      <button *ngIf="!isThumbShowing" style="height: 64px;" class="col-12 btn btn-warning fc-custom"
+        (click)="isThumbShowing = true">
+        OK
+      </button>
+
+      <div *ngIf="isThumbShowing" class="lfs-7">
+        👍
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div style="padding-top: 64px;">
+  <div class="row m-0 p-0 mx-auto p-2" style="max-width: 740px;">
+
+    <div class="col-12">
+      <div class="bg-success p-2 rounded-3 text-white row m-0 p-0">
+
+        <div class="col-auto d-flex p-0">
+          <i class="bi bi-stars my-auto text-warning px-2" style="font-size: 48px;"></i>
+        </div>
+
+        <div class="col d-flex p-0">
+          <label class="my-auto lfs-3 lfw-2"><b class="lfs-3">Seja bem viado</b> ao servidor de teste. Utilize o
+            formulário
+            abaixo para gerar imagens.</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 mt-2 d-flex" style="margin-bottom: -3px;">
+      <div class="col tab-btn" (click)="tabId=1" [class.active]="tabId==1">Criar</div>
+      <div class="col tab-btn" (click)="tabId=2" [class.active]="tabId==2">Editar</div>
+      <div class="col tab-btn" (click)="tabId=3" [class.active]="tabId==3">Resultado</div>
+    </div>
+
+    <div class="col-12 tab-page" *ngIf="tabId==1">
+
+      <div class="col-12 mt-3">
+        <label>O que deseja gerar</label>
+
+        <div class="m-0 p-2 bg-danger text-white rounded-3">
+          <label class="lfs-3 lfw-2">
+            <b class="lfs-3"> <i class="bi bi-exclamation-circle me-1 lfs-3"></i>Atenção:</b>
+            Está funcionando apenas em inglês no momento 🫠
+          </label>
+        </div>
+
+        <textarea [disabled]="isLoading" [readonly]="isLoading" [(ngModel)]="inputPrompt"
+          class="form-control mt-2 fc-custom" placeholder="Digite aqui ..." rows="5">
+        </textarea>
+      </div>
+
+      <div class="col-12 mt-3">
+        <label>Selecione um estilo</label>
+        <select [disabled]="isLoading" [(ngModel)]="styleId" class="form-select fc-custom mt-2">
+          <option *ngFor="let style of styles;" [value]="style.id">{{style.description}}</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <div class="col mt-3">
+          <label>Selecione um formato</label>
+          <select [disabled]="isLoading" [(ngModel)]="resolutionId" class="form-select fc-custom mt-2">
+            <option [value]="0">1:1</option>
+            <option [value]="3">2:1</option>
+            <option [value]="1">3:4</option>
+            <option [value]="2">4:3</option>
+          </select>
+        </div>
+  
+        <div class="col-auto mt-3">
+          <label>HD</label>
+          <div class="form-check form-switch mt-2">
+            <input (change)="ShowWarning()" [(ngModel)]="request.enable_hr" class="form-check-input fc-custom"
+              role="switch" type="checkbox">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 my-3" *ngIf="isHdWarningShowing">
+        <div class="bg-danger text-white rounded-3 text-center p-2">
+          <label class="">
+            <b class=""> <i class="bi bi-exclamation-circle me-1"></i> Atenção:</b>
+            Ao habilitar o HD a imagem deve demorar mais tempo para ser gerada !
+          </label>
+
+          <button (click)="isHdWarningShowing = false;" style="height: 64px; width: 128px;"
+            class="mt-3 btn btn-primary fc-custom" (click)="isThumbShowing = true">
+            Ok👍
+          </button>
+        </div>
+      </div>
+
+      <div class="my-3" *ngIf="!isHdWarningShowing">
+        <button class="col-12 btn btn-primary" [disabled]="isLoading" (click)="GenerateImage(1)">
+          <i class="bi bi-image me-2"></i>
+          Gerar Imagem
+        </button>
+      </div>
+    </div>
+
+    <div class="col-12 tab-page p-0" *ngIf="tabId==2">
+      <app-ocorp-canvas [(colorMask)]="colorMask" [(mask)]="mask" [(imageSrc)]="imageSrc" ></app-ocorp-canvas>
+
+      <div class="p-2">
+        <div class="col-12">
+          <label>Descreva a imagem acima considerando suas modificações</label>
+  
+          <div class="m-0 p-2 bg-danger text-white rounded-3">
+            <label class="lfs-3 lfw-2">
+              <b class="lfs-3"> <i class="bi bi-exclamation-circle me-1 lfs-3"></i>Atenção:</b>
+              Está funcionando apenas em inglês no momento 🫠
+            </label>
+          </div>
+  
+          <textarea [disabled]="isLoading" [readonly]="isLoading" [(ngModel)]="inputPrompt"
+            class="form-control mt-2 fc-custom" placeholder="Digite aqui ..." rows="5">
+          </textarea>
+        </div>
+
+        <div class="col-12 mt-3">
+          <label>Selecione um estilo</label>
+          <select [disabled]="isLoading" [(ngModel)]="styleId" class="form-select fc-custom mt-2">
+            <option *ngFor="let style of styles;" [value]="style.id">{{style.description}}</option>
+          </select>
+        </div>
+
+        <div class="col-12 mt-3">
+          <label>Opções avançadas</label>
+          <div class="form-check form-switch mt-2">
+            <input [(ngModel)]="isAdvancedShow" class="form-check-input fc-custom"
+              role="switch" type="checkbox">
+          </div>
+        </div>
+
+        <div class="col-12 mt-3" *ngIf="isAdvancedShow">
+          <div class="fc-custom p-2">
+            <div class="col text-start">
+              <label>Suavização de Máscara: <label class="text-muted">{{requestImg2Img.mask_blur}}px</label></label>
+              <input step="1" max="20" min="3" [(ngModel)]="requestImg2Img.mask_blur" class="col-12"
+                type="range">
+            </div>
+  
+            <div class="col text-start">
+              <label>Intensidade de alteração: <label class="text-muted">{{(requestImg2Img.denoising_strength * 100).toFixed(0)}}%</label></label>
+              <input step="0.05" max="0.8" min="0.3" [(ngModel)]="requestImg2Img.denoising_strength" class="col-12"
+                type="range">
+            </div>
+          </div>
+
+
+
+        </div>
+
+        <div class="mt-3 p-2 bg-danger text-white rounded-3" *ngIf="formError">
+          <label class="lfs-3 lfw-2">
+            <b class="lfs-3"> 
+              <i class="bi bi-exclamation-circle me-1 lfs-3">
+              </i>{{formError}}</b>
+          </label>
+        </div>
+
+        <button class="col-12 btn btn-primary mt-3" [disabled]="isLoading" (click)="GenerateImage(2)">
+          <i class="bi bi-image me-2"></i>
+          Gerar Imagem
+        </button>
+      </div>
+
+    </div>
+
+    <div class="col-12 tab-page" *ngIf="tabId==3">
+      <ng-container *ngIf="resultSrc">
+        <div class="mt-3">
+          <div class="bg-white fc-custom d-flex">
+            <img [src]="resultSrc" class="mx-auto" style="width: 100%;object-fit: contain;">
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="!resultSrc">
+        <div class="my-3">
+          <p class="lfs-3 bg-info p-2 rounded-3">
+            <i class="bi bi-info-circle"></i>
+            Utilize as abas ao lado para gerar imagens.
+          </p>
+        </div>
+      </ng-container>
+
+      <div class="mt-3" *ngIf="hasError">
+        <div class="bg-white fc-custom d-flex">
+          <div class="col text-center p-4">
+            <i class="bi bi-exclamation-circle mx-auto text-danger" style="font-size: 64px;"></i>
+            <p class="mb-0">Falha ao gerar imagem !</p>
+            <p class="text-secondary">Por favor , tente novamente</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

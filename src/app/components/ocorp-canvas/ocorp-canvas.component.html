@@ -1,0 +1,54 @@
+<div class="col-12 p-2 text-center">
+  <label class="btn btn-primary" for="fileUpload">
+    <i class="bi bi-upload me-2"></i>
+    Upload
+  </label>
+  <input (change)="onFileChange($event)" id="fileUpload" type="file" style="display: none;">
+</div>
+
+<div class="ocorp-canvas p-0">
+  <div class="mx-auto" style="scale: 1;position: relative;" [style.width.px]="this.globalCanvasWidth"
+    [style.height.px]="this.globalCanvasHeight">
+
+    <canvas [style.height.px]="this.globalCanvasHeight" [style.width.px]="this.globalCanvasWidth" #imageElement width="0" height="0" style="z-index: 1; position: absolute;top:0;left:0;border-width: 2px;border-style: solid;border-color: black;"></canvas>
+
+    <canvas [style.display]="paintMode==1 ?'inline':'none'" [style.height.px]="this.globalCanvasHeight" [style.width.px]="this.globalCanvasWidth" #canvasElement width="0" height="0" style="z-index: 2;position: absolute;top:0;left:0;opacity: 0.3;"></canvas>
+
+    <canvas [style.height.px]="this.globalCanvasHeight" [style.width.px]="this.globalCanvasWidth" #pointerCanvasElement width="0" height="0" style="z-index: 3;position: absolute;top:0;left:0;"></canvas>
+  </div>
+</div>
+
+<div class="row m-0 p-2">
+  <div class="col-auto">
+    <div class="row justify-content-center">
+      <i class="bi bi-trash ocorp-icon bg-danger me-2" (click)="fillBackgroundWithWhite()"></i>
+      <label class="bi bi-palette ocorp-icon me-2" for="color" [style.background-color]="paintColor"></label>
+      <input [(ngModel)]="paintColor" type="color" style="display: none;" id="color" (input)="changeBrushColor()">
+      <!-- <i class="bi bi-trash ocorp-icon bg-success me-2"></i>-->
+    </div>
+  </div>
+
+  <div class="col text-start">
+    <label>Tamanho do cursor</label>
+    <input step="1" [max]="pointerMax" [min]="pointerMin" [(ngModel)]="pointerSize" (change)="updateCursorSize()" class="col-12"
+      type="range">
+  </div>
+
+  <div class="col-12">
+    <label class="col-12">Modo</label>
+    <div class="d-flex">
+      <div class="col">
+        <input [value]="1" [(ngModel)]="paintMode" class="fc-custom form-check-input form-radio my-auto" type="radio" name="paintMode" id="modeMask">
+        <label class="ms-2 my-auto" for="modeMask">
+          Máscara
+        </label>
+      </div>
+      <div class="col">
+        <input [value]="2" [(ngModel)]="paintMode" class="fc-custom ms-2 form-check-input form-radio my-auto" type="radio" name="paintMode" id="modePaint">
+        <label class="ms-2 my-auto" for="modePaint">
+          Pintura
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
